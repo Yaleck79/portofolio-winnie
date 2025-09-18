@@ -330,7 +330,6 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
         .portfolio-item:hover {
@@ -341,7 +340,8 @@
         .portfolio-image {
             width: 100%;
             height: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -349,6 +349,23 @@
             font-weight: 700;
             font-size: 1.1rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .portfolio-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .portfolio-image span {
+            position: relative;
+            z-index: 2;
         }
 
         .portfolio-info {
@@ -365,6 +382,7 @@
             color: var(--text-light);
             font-weight: 500;
             line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
         .project-status {
@@ -375,11 +393,168 @@
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
-            margin-top: 1rem;
+            margin-bottom: 1rem;
         }
 
         .status-completed {
             background: #27ae60;
+        }
+
+        .voir-plus-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .voir-plus-btn:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Project Detail Page */
+        .project-detail {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .project-detail-content {
+            background: white;
+            margin: 2rem auto;
+            max-width: 1000px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .project-header {
+            padding: 3rem 3rem 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .project-close:hover {
+            color: var(--accent-color);
+        }
+
+        .project-main-image {
+            width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .project-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 2rem 3rem 3rem;
+        }
+
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .project-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .spec-card {
+            background: var(--bg-section);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .spec-card h4 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            margin-top: 0.5rem;
+        }
+
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .color-code {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .typography-sample {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
         }
 
         /* Quotes Section avec fond sombre mais lisible */
@@ -695,50 +870,6 @@
             z-index: 1;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            backdrop-filter: blur(10px);
-        }
-
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 2.5rem;
-            border-radius: 15px;
-            max-width: 900px;
-            width: 95%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-light);
-            transition: color 0.3s ease;
-        }
-
-        .modal-close:hover {
-            color: var(--accent-color);
-        }
-
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -797,6 +928,19 @@
             }
 
             .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-detail-content {
+                margin: 1rem;
+            }
+
+            .project-header,
+            .project-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .project-specs {
                 grid-template-columns: 1fr;
             }
 
@@ -904,57 +1048,97 @@
             <h2 class="section-title">Portfolio</h2>
             <p class="section-subtitle">Découvrez une sélection de mes créations récentes</p>
             <div class="portfolio-grid">
-                <div class="portfolio-item" onclick="openModal('project1')">
-                    <div class="portfolio-image">[Image Projet 1 - Identité Visuelle Café]</div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background-image: url('tiyaa/tiyaa_logo.png');">
+                        <span>Thé Tiyaa</span>
+                    </div>
                     <div class="portfolio-info">
-                        <h3>Identité Visuelle - Café Bohème</h3>
-                        <p>Création complète d'identité visuelle pour un café artisanal</p>
+                        <h3>Identité Visuelle - Thé Tiyaa</h3>
+                        <p>Création complète d'identité visuelle pour un salon de thé artisanal avec une approche moderne et chaleureuse.</p>
                         <span class="project-status status-completed">Terminé</span>
+                        <br>
+                        <a href="#" class="voir-plus-btn" onclick="openProjectDetail('project1')">Voir plus</a>
                     </div>
                 </div>
-                <div class="portfolio-item" onclick="openModal('project2')">
-                    <div class="portfolio-image">[Image Projet 2 - Site Web E-commerce]</div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop&auto=format');">
+                        <span>Boutique Mode</span>
+                    </div>
                     <div class="portfolio-info">
                         <h3>Design Web - Boutique Mode</h3>
-                        <p>Interface e-commerce moderne et responsive</p>
+                        <p>Interface e-commerce moderne et responsive pour une boutique de prêt-à-porter féminin.</p>
                         <span class="project-status">En cours</span>
+                        <br>
+                        <a href="#" class="voir-plus-btn" onclick="openProjectDetail('project2')">Voir plus</a>
                     </div>
                 </div>
-                <div class="portfolio-item" onclick="openModal('project3')">
-                    <div class="portfolio-image">[Image Projet 3 - Packaging Cosmétique]</div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background-image: url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=250&fit=crop&auto=format');">
+                        <span>Cosmétique Bio</span>
+                    </div>
                     <div class="portfolio-info">
                         <h3>Packaging - Ligne Cosmétique</h3>
-                        <p>Design de packaging élégant pour produits de beauté</p>
+                        <p>Design de packaging élégant pour une gamme de produits de beauté naturels et bio.</p>
                         <span class="project-status status-completed">Terminé</span>
+                        <br>
+                        <a href="#" class="voir-plus-btn" onclick="openProjectDetail('project3')">Voir plus</a>
                     </div>
                 </div>
-                <div class="portfolio-item" onclick="openModal('project4')">
-                    <div class="portfolio-image">[Image Projet 4 - Affiche Événement]</div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=250&fit=crop&auto=format');">
+                        <span>Festival Musique</span>
+                    </div>
                     <div class="portfolio-info">
                         <h3>Affichage - Festival Musique</h3>
-                        <p>Communication visuelle pour événement culturel</p>
+                        <p>Communication visuelle dynamique pour un festival de musique électronique.</p>
                         <span class="project-status status-completed">Terminé</span>
+                        <br>
+                        <a href="#" class="voir-plus-btn" onclick="openProjectDetail('project4')">Voir plus</a>
                     </div>
                 </div>
-                <div class="portfolio-item" onclick="openModal('project5')">
-                    <div class="portfolio-image">[Image Projet 5 - Logo Restaurant]</div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=250&fit=crop&auto=format');">
+                        <span>Restaurant</span>
+                    </div>
                     <div class="portfolio-info">
                         <h3>Logo - Restaurant Gastronomique</h3>
-                        <p>Création de logo raffiné pour établissement haut de gamme</p>
+                        <p>Création de logo raffiné pour un établissement culinaire haut de gamme.</p>
                         <span class="project-status status-completed">Terminé</span>
+                        <br>
+                        <a href="#" class="voir-plus-btn" onclick="openProjectDetail('project5')">Voir plus</a>
                     </div>
                 </div>
-                <div class="portfolio-item" onclick="openModal('project6')">
-                    <div class="portfolio-image">[Image Projet 6 - App Mobile]</div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image" style="background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=250&fit=crop&auto=format');">
+                        <span>App Fitness</span>
+                    </div>
                     <div class="portfolio-info">
                         <h3>UI Design - Application Fitness</h3>
-                        <p>Interface utilisateur pour application de sport</p>
+                        <p>Interface utilisateur intuitive pour une application de coaching sportif personnalisé.</p>
                         <span class="project-status">En attente</span>
+                        <br>
+                        <a href="#" class="voir-plus-btn" onclick="openProjectDetail('project6')">Voir plus</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Project Detail Modal -->
+    <div id="projectDetail" class="project-detail">
+        <div class="project-detail-content">
+            <button class="project-close" onclick="closeProjectDetail()">&times;</button>
+            <div class="project-header">
+                <div id="projectMainImage" class="project-main-image" ></div>
+                <h2 id="projectTitle"></h2>
+                <p id="projectDescription" class="project-description"></p>
+            </div>
+            <div class="project-content">
+                <div id="projectGallery" class="project-gallery"></div>
+                <div id="projectSpecs" class="project-specs"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Quotes Section -->
     <section class="section quotes-section">
@@ -1083,7 +1267,7 @@
                 <div class="footer-section">
                     <h3>Contact</h3>
                     <p>Email: senami.winnie@email.com<br>
-                    Téléphone: +229 01 68 969 996 <br>
+                    Téléphone: +229 01 68 969 996<br>
                     Calavi, Bénin</p>
                 </div>
             </div>
@@ -1092,16 +1276,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Modal for Project Details -->
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <div id="modalContent">
-                <!-- Content will be dynamically loaded -->
-            </div>
-        </div>
-    </div>
 
     <script>
         // Navigation scroll effect
@@ -1133,9 +1307,233 @@
                         block: 'start'
                     });
                 }
-                // Close mobile menu if open
                 navLinks.classList.remove('active');
             });
+        });
+
+        // Project data with detailed information
+        const projectData = {
+            project1: {
+                title: 'Identité Visuelle - Thé Tiyaa',
+                mainImage: 'tiyaa/11349968.png',
+                description: 'Création complète d\'une identité visuelle pour un salon de thé artisanal. Le projet incluait la conception du logo, de la charte graphique, du packaging des produits, ainsi que tous les supports de communication. L\'approche privilégiait l\'authenticité et la chaleur humaine tout en conservant une esthétique moderne et épurée.',
+                gallery: [
+                    'tiyaa/Polo_Shirt_Mockup_1.png',
+                    'tiyaa/Free_Pen_Mockup_1.png',
+                    'tiyaa/Business_Card_Mockup_1.png',
+                    'tiyaa/tiyaa_logo.png'
+                ],
+                colors: ['#8B4513', '#D2691E', '#F4A460', '#FFF8DC'],
+                colorNames: ['Marron', 'Orange', 'Beige', 'Crème'],
+                typography: {
+                    primary: 'Playfair Display',
+                    secondary: 'Inter'
+                },
+                details: {
+                    client: 'Thé Tiyaa',
+                    année: '2024',
+                    services: 'Logo, Charte graphique, Packaging, Communication print',
+                    statut: 'Terminé'
+                }
+            },
+            project2: {
+                title: 'Design Web - Boutique Mode',
+                mainImage: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop&auto=format',
+                description: 'Conception d\'une interface e-commerce moderne et intuitive pour une boutique de mode en ligne. Le design se concentre sur l\'expérience utilisateur avec une navigation fluide, des visuels attrayants et une optimisation mobile. L\'objectif était de créer un parcours d\'achat simplifié tout en mettant en valeur les produits.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1445205170230-053b83016050?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=300&h=200&fit=crop&auto=format'
+                ],
+                colors: ['#000000', '#FFFFFF', '#FF6B6B', '#4ECDC4'],
+                colorNames: ['Noir', 'Blanc', 'Rose', 'Turquoise'],
+                typography: {
+                    primary: 'Montserrat',
+                    secondary: 'Open Sans'
+                },
+                details: {
+                    client: 'ModeFashion Store',
+                    année: '2024',
+                    services: 'UI/UX Design, Design système, Prototypage',
+                    statut: 'En cours'
+                }
+            },
+            project3: {
+                title: 'Packaging - Ligne Cosmétique',
+                mainImage: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&h=400&fit=crop&auto=format',
+                description: 'Design de packaging élégant et raffiné pour une ligne de produits cosmétiques bio. L\'approche minimaliste met en avant la naturalité des ingrédients avec des matériaux éco-responsables. Chaque produit de la gamme suit une cohérence visuelle forte tout en conservant sa propre personnalité.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1576426863848-c21f53c60b19?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=300&h=200&fit=crop&auto=format'
+                ],
+                colors: ['#E8F5E8', '#90EE90', '#228B22', '#006400'],
+                colorNames: ['Vert pâle', 'Vert clair', 'Vert forêt', 'Vert foncé'],
+                typography: {
+                    primary: 'Lora',
+                    secondary: 'Source Sans Pro'
+                },
+                details: {
+                    client: 'BeautyNature',
+                    année: '2024',
+                    services: 'Design packaging, Direction artistique, Print',
+                    statut: 'Terminé'
+                }
+            },
+            project4: {
+                title: 'Affichage - Festival Musique',
+                mainImage: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=400&fit=crop&auto=format',
+                description: 'Création de la communication visuelle complète pour un festival de musique électronique. Le design dynamique et énergique reflète l\'esprit festif avec des formes géométriques, des dégradés vibrants et une typographie moderne. L\'identité a été déclinée sur tous les supports de communication.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=300&h=200&fit=crop&auto=format'
+                ],
+                colors: ['#FF1493', '#00FFFF', '#FFD700', '#8A2BE2'],
+                colorNames: ['Rose vif', 'Cyan', 'Jaune', 'Violet'],
+                typography: {
+                    primary: 'Bebas Neue',
+                    secondary: 'Roboto Condensed'
+                },
+                details: {
+                    client: 'Festival ElectroBeats',
+                    année: '2023',
+                    services: 'Design d\'affiche, Communication événementielle, Merchandising',
+                    statut: 'Terminé'
+                }
+            },
+            project5: {
+                title: 'Logo - Restaurant Gastronomique',
+                mainImage: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=400&fit=crop&auto=format',
+                description: 'Création d\'un logo sophistiqué pour un restaurant gastronomique français. L\'approche privilégie l\'élégance et le raffinement avec une typographie classique revisitée. Le symbole évoque la tradition culinaire tout en apportant une touche contemporaine. L\'identité s\'adapte à tous les supports du restaurant.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1586999768446-39bfaada7e2f?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1544148103-0773bf10d330?w=300&h=200&fit=crop&auto=format'
+                ],
+                colors: ['#8B0000', '#FFD700', '#2F4F4F', '#F5F5DC'],
+                colorNames: ['Bordeaux', 'Or', 'Gris ardoise', 'Beige'],
+                typography: {
+                    primary: 'Cormorant Garamond',
+                    secondary: 'Crimson Text'
+                },
+                details: {
+                    client: 'Le Grand Gourmand',
+                    année: '2023',
+                    services: 'Création logo, Identité visuelle, Support print',
+                    statut: 'Terminé'
+                }
+            },
+            project6: {
+                title: 'UI Design - Application Fitness',
+                mainImage: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop&auto=format',
+                description: 'Conception de l\'interface utilisateur pour une application mobile de fitness. Le design se concentre sur la motivation et l\'engagement avec des éléments visuels dynamiques, des graphiques clairs et une navigation intuitive. L\'approche UX favorise la création d\'habitudes saines et le suivi des progrès.',
+                gallery: [
+                    'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=300&h=200&fit=crop&auto=format',
+                    'https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=300&h=200&fit=crop&auto=format'
+                ],
+                colors: ['#FF6B35', '#F7931E', '#FFD23F', '#06FFA5'],
+                colorNames: ['Orange vif', 'Orange', 'Jaune', 'Vert mint'],
+                typography: {
+                    primary: 'Poppins',
+                    secondary: 'Inter'
+                },
+                details: {
+                    client: 'FitLife App',
+                    année: '2024',
+                    services: 'UI Design, UX Research, Design système mobile',
+                    statut: 'En attente'
+                }
+            }
+        };
+
+        function openProjectDetail(projectId) {
+            const project = projectData[projectId];
+            if (!project) return;
+
+            // Update content
+            document.getElementById('projectTitle').textContent = project.title;
+            document.getElementById('projectDescription').textContent = project.description;
+            document.getElementById('projectMainImage').style.backgroundImage = `url(${project.mainImage})`;
+
+            // Update gallery
+            const gallery = document.getElementById('projectGallery');
+            gallery.innerHTML = project.gallery.map(img => 
+                `<div class="gallery-image" style="background-image: url(${img});" onclick="viewLargeImage('${img}')"></div>`
+            ).join('');
+
+            // Update specs
+            const specs = document.getElementById('projectSpecs');
+            specs.innerHTML = `
+                <div class="spec-card">
+                    <h4>Palette de couleurs</h4>
+                    <div class="color-palette">
+                        ${project.colors.map((color, index) => `
+                            <div class="color-swatch" style="background-color: ${color};">
+                                <div class="color-code">${project.colorNames[index]}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="spec-card">
+                    <h4>Typographies</h4>
+                    <div class="typography-sample" style="font-family: '${project.typography.primary}', serif;">
+                        ${project.typography.primary} - Titre principal
+                    </div>
+                    <div class="typography-sample" style="font-family: '${project.typography.secondary}', sans-serif;">
+                        ${project.typography.secondary} - Texte courant
+                    </div>
+                </div>
+                <div class="spec-card">
+                    <h4>Informations projet</h4>
+                    <p><strong>Client:</strong> ${project.details.client}</p>
+                    <p><strong>Année:</strong> ${project.details.année}</p>
+                    <p><strong>Services:</strong> ${project.details.services}</p>
+                    <p><strong>Statut:</strong> <span style="padding: 4px 12px; background: ${project.details.statut === 'Terminé' ? '#27ae60' : project.details.statut === 'En cours' ? '#e74c3c' : '#f39c12'}; color: white; border-radius: 20px; font-size: 0.8rem;">${project.details.statut}</span></p>
+                </div>
+            `;
+
+            // Show modal
+            document.getElementById('projectDetail').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectDetail() {
+            document.getElementById('projectDetail').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function viewLargeImage(imageSrc) {
+            // Simple image viewer - you could enhance this with a proper lightbox
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(`
+                <html>
+                    <head><title>Image</title></head>
+                    <body style="margin:0; background:#000; display:flex; justify-content:center; align-items:center; height:100vh;">
+                        <img src="${imageSrc}" style="max-width:100%; max-height:100%; object-fit:contain;">
+                    </body>
+                </html>
+            `);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('projectDetail').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProjectDetail();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProjectDetail();
+            }
         });
 
         // Quotes rotation
@@ -1144,11 +1542,9 @@
         const quoteDots = document.querySelectorAll('.quote-dot');
 
         function showQuote(index) {
-            // Hide all quotes
             quotes.forEach(quote => quote.classList.remove('active'));
             quoteDots.forEach(dot => dot.classList.remove('active'));
             
-            // Show selected quote
             quotes[index].classList.add('active');
             quoteDots[index].classList.add('active');
             currentQuote = index;
@@ -1164,212 +1560,16 @@
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form data
             const nom = document.getElementById('nom').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
             
-            // Simple validation
             if (nom && email && message) {
                 alert('Merci pour votre message ! Je vous répondrai dans les plus brefs délais.');
-                // Reset form
                 this.reset();
             } else {
                 alert('Veuillez remplir tous les champs du formulaire.');
             }
-        });
-
-        // Project modal functionality
-        const projectData = {
-            project1: {
-                title: 'Identité Visuelle - Café Bohème',
-                images: [
-                    '[Image principale - Logo Café Bohème]',
-                    '[Image 2 - Applications logo]',
-                    '[Image 3 - Carte de visite]',
-                    '[Image 4 - Packaging produits]'
-                ],
-                description: 'Création complète d\'une identité visuelle pour un café artisanal situé au cœur de Paris. Le projet incluait la conception du logo, de la charte graphique, du packaging des produits, ainsi que tous les supports de communication.',
-                details: {
-                    client: 'Café Bohème',
-                    année: '2024',
-                    services: 'Logo, Charte graphique, Packaging, Communication print',
-                    statut: 'Terminé'
-                }
-            },
-            project2: {
-                title: 'Design Web - Boutique Mode',
-                images: [
-                    '[Image principale - Page d\'accueil]',
-                    '[Image 2 - Page produit]',
-                    '[Image 3 - Version mobile]',
-                    '[Image 4 - Interface admin]'
-                ],
-                description: 'Conception d\'une interface e-commerce moderne et intuitive pour une boutique de mode en ligne. Focus sur l\'expérience utilisateur et l\'optimisation des conversions.',
-                details: {
-                    client: 'ModeFashion Store',
-                    année: '2024',
-                    services: 'UI/UX Design, Design système, Prototypage',
-                    statut: 'En cours'
-                }
-            },
-            project3: {
-                title: 'Packaging - Ligne Cosmétique',
-                images: [
-                    '[Image principale - Gamme complète]',
-                    '[Image 2 - Détail texture]',
-                    '[Image 3 - Mise en situation]',
-                    '[Image 4 - Variations couleurs]'
-                ],
-                description: 'Design de packaging élégant et raffiné pour une ligne de produits cosmétiques bio. Création d\'un univers visuel cohérent reflétant les valeurs naturelles de la marque.',
-                details: {
-                    client: 'BeautyNature',
-                    année: '2024',
-                    services: 'Design packaging, Direction artistique, Print',
-                    statut: 'Terminé'
-                }
-            },
-            project4: {
-                title: 'Affichage - Festival Musique',
-                images: [
-                    '[Image principale - Affiche festival]',
-                    '[Image 2 - Déclinaisons formats]',
-                    '[Image 3 - Merchandising]',
-                    '[Image 4 - Signalétique événement]'
-                ],
-                description: 'Création de la communication visuelle complète pour un festival de musique. Design d\'affiches, flyers, merchandising et signalétique événementielle.',
-                details: {
-                    client: 'Festival Sounds',
-                    année: '2023',
-                    services: 'Design d\'affiche, Communication événementielle, Merchandising',
-                    statut: 'Terminé'
-                }
-            },
-            project5: {
-                title: 'Logo - Restaurant Gastronomique',
-                images: [
-                    '[Image principale - Logo final]',
-                    '[Image 2 - Processus création]',
-                    '[Image 3 - Applications]',
-                    '[Image 4 - Menu restaurant]'
-                ],
-                description: 'Création d\'un logo sophistiqué pour un restaurant gastronomique. Recherche d\'élégance et de raffinement pour refléter l\'excellence culinaire de l\'établissement.',
-                details: {
-                    client: 'Le Grand Gourmand',
-                    année: '2023',
-                    services: 'Création logo, Identité visuelle, Support print',
-                    statut: 'Terminé'
-                }
-            },
-            project6: {
-                title: 'UI Design - Application Fitness',
-                images: [
-                    '[Image principale - Écrans app]',
-                    '[Image 2 - Wireframes]',
-                    '[Image 3 - Système design]',
-                    '[Image 4 - Interactions]'
-                ],
-                description: 'Conception de l\'interface utilisateur pour une application mobile de fitness. Design centré sur l\'expérience utilisateur avec une approche motivante et engageante.',
-                details: {
-                    client: 'FitLife App',
-                    année: '2024',
-                    services: 'UI Design, UX Research, Design système mobile',
-                    statut: 'En attente'
-                }
-            }
-        };
-
-        function openModal(projectId) {
-            const modal = document.getElementById('projectModal');
-            const modalContent = document.getElementById('modalContent');
-            const project = projectData[projectId];
-            
-            if (project) {
-                modalContent.innerHTML = `
-                    <h2>${project.title}</h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
-                        ${project.images.map(img => `
-                            <div style="aspect-ratio: 1; background: #ecf0f1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #7f8c8d; text-align: center; padding: 1rem;">
-                                ${img}
-                            </div>
-                        `).join('')}
-                    </div>
-                    <p style="line-height: 1.6; margin-bottom: 2rem;">${project.description}</p>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
-                        <div>
-                            <strong>Client:</strong><br>${project.details.client}
-                        </div>
-                        <div>
-                            <strong>Année:</strong><br>${project.details.année}
-                        </div>
-                        <div>
-                            <strong>Services:</strong><br>${project.details.services}
-                        </div>
-                        <div>
-                            <strong>Statut:</strong><br>
-                            <span style="padding: 4px 12px; background: ${project.details.statut === 'Terminé' ? '#27ae60' : project.details.statut === 'En cours' ? '#e74c3c' : '#f39c12'}; color: white; border-radius: 20px; font-size: 0.8rem;">
-                                ${project.details.statut}
-                            </span>
-                        </div>
-                    </div>
-                `;
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('projectModal');
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        document.getElementById('projectModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.skill-card, .portfolio-item, .testimonial').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Add loading animation for portfolio images
-        document.querySelectorAll('.portfolio-image').forEach(img => {
-            img.addEventListener('mouseenter', function() {
-                this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 70%, #f093fb 100%)';
-            });
-            
-            img.addEventListener('mouseleave', function() {
-                this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-            });
         });
 
         // Enhanced form validation
@@ -1425,7 +1625,29 @@
                 this.querySelector('.social-icon').style.transform = 'scale(1)';
             });
         });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.skill-card, .portfolio-item, .testimonial').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
-                     
