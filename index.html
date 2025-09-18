@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senami Winnie - Graphiste Créative</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --text-light: #7f8c8d;
+            --text-dark: #2c3e50;
+            --bg-light: #ffffff;
+            --bg-section: #f8f9fa;
+            --border-color: #ecf0f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section avec image de fond subtile */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.7) 0%, rgba(231, 76, 60, 0.5) 100%),
+                        url('https://images.unsplash.com/photo-1720170494683-48428a09122b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.6s;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.9s;
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+            text-shadow: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(231, 76, 60, 0.5);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* About Section avec fond très subtil */
+        .about-section {
+            background: linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%),
+                        url('https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, rgba(231, 76, 60, 0.1), rgba(44, 62, 80, 0.1)),
+                        url('https://images.unsplash.com/photo-1494790108755-2616c4f012bb?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-text {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .cv-button {
+            display: inline-block;
+            padding: 12px 28px;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cv-button:hover {
+            background: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Skills Section avec fond très léger */
+        .skills-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.9) 100%),
+                        url('https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-card h3 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card p {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .skill-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-color), #c0392b);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Portfolio Section */
+        .portfolio-section {
+            background: var(--bg-light);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .portfolio-info {
+            padding: 2rem;
+        }
+
+        .portfolio-info h3 {
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .portfolio-info p {
+            color: var(--text-light);
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 6px 15px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .status-completed {
+            background: #27ae60;
+        }
+
+        /* Quotes Section avec fond sombre mais lisible */
+        .quotes-section {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.85) 0%, rgba(231, 76, 60, 0.7) 100%),
+                        url('https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .quotes-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .quotes-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .quotes-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .quote {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            transition: opacity 0.5s ease;
+        }
+
+        .quote.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-weight: 600;
+        }
+
+        .quote-author {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .quotes-section .section-title {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .quote-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quote-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .quote-dot.active {
+            background: white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: var(--bg-section);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Contact Section avec fond très subtil */
+        .contact-section {
+            background: linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%),
+                        url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-form h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--accent-color), #c0392b);
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.4);
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 15px;
+            text-decoration: none;
+            color: var(--text-dark);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .social-link:hover {
+            transform: translateX(10px) translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .social-link h4 {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .social-link p {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .social-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--accent-color), #c0392b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a252f 100%);
+            color: white;
+            padding: 3rem 0 2rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=2064&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 900px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero,
+            .about-section,
+            .skills-section,
+            .quotes-section,
+            .contact-section {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">Senami Winnie</div>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#apropos">À propos</a></li>
+                    <li><a href="#competences">Compétences</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#temoignages">Témoignages</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>Senami Winnie</h1>
+            <p class="subtitle">Graphiste créative & passionnée</p>
+            <a href="#portfolio" class="cta-button">Découvrir mon travail</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos" class="section about-section">
+        <div class="container">
+            <h2 class="section-title">À propos</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    Senami Winnie
+                </div>
+                <div class="about-text">
+                    <p>Graphiste passionnée avec plus de 5 ans d'expérience, je transforme les idées en créations visuelles impactantes. Spécialisée dans l'identité visuelle et le design numérique, j'accompagne mes clients dans la création d'univers graphiques uniques et mémorables.</p>
+                    <p>Mon approche allie créativité artistique et stratégie de communication pour donner vie à vos projets les plus ambitieux. Chaque création raconte une histoire et véhicule vos valeurs avec authenticité.</p>
+                    <a href="#" class="cv-button">Télécharger mon CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="competences" class="section skills-section">
+        <div class="container">
+            <h2 class="section-title">Compétences</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">✏️</div>
+                    <h3>Design Graphique</h3>
+                    <p>Création d'identités visuelles complètes et cohérentes pour tous supports</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>Identité Visuelle</h3>
+                    <p>Développement de logos, chartes graphiques et univers de marque</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📸</div>
+                    <h3>Retouche Photo</h3>
+                    <p>Maîtrise avancée de Photoshop pour sublimer vos visuels</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3>UX/UI Design</h3>
+                    <p>Conception d'interfaces intuitives et expériences utilisateur optimisées</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📱</div>
+                    <h3>Design Digital</h3>
+                    <p>Création de contenus pour le web, réseaux sociaux et applications</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🖨️</div>
+                    <h3>Print Design</h3>
+                    <p>Mise en page professionnelle pour supports imprimés</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section portfolio-section">
+        <div class="container">
+            <h2 class="section-title">Portfolio</h2>
+            <p class="section-subtitle">Découvrez une sélection de mes créations récentes</p>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" onclick="openModal('project1')">
+                    <div class="portfolio-image">[Image Projet 1 - Identité Visuelle Café]</div>
+                    <div class="portfolio-info">
+                        <h3>Identité Visuelle - Café Bohème</h3>
+                        <p>Création complète d'identité visuelle pour un café artisanal</p>
+                        <span class="project-status status-completed">Terminé</span>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openModal('project2')">
+                    <div class="portfolio-image">[Image Projet 2 - Site Web E-commerce]</div>
+                    <div class="portfolio-info">
+                        <h3>Design Web - Boutique Mode</h3>
+                        <p>Interface e-commerce moderne et responsive</p>
+                        <span class="project-status">En cours</span>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openModal('project3')">
+                    <div class="portfolio-image">[Image Projet 3 - Packaging Cosmétique]</div>
+                    <div class="portfolio-info">
+                        <h3>Packaging - Ligne Cosmétique</h3>
+                        <p>Design de packaging élégant pour produits de beauté</p>
+                        <span class="project-status status-completed">Terminé</span>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openModal('project4')">
+                    <div class="portfolio-image">[Image Projet 4 - Affiche Événement]</div>
+                    <div class="portfolio-info">
+                        <h3>Affichage - Festival Musique</h3>
+                        <p>Communication visuelle pour événement culturel</p>
+                        <span class="project-status status-completed">Terminé</span>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openModal('project5')">
+                    <div class="portfolio-image">[Image Projet 5 - Logo Restaurant]</div>
+                    <div class="portfolio-info">
+                        <h3>Logo - Restaurant Gastronomique</h3>
+                        <p>Création de logo raffiné pour établissement haut de gamme</p>
+                        <span class="project-status status-completed">Terminé</span>
+                    </div>
+                </div>
+                <div class="portfolio-item" onclick="openModal('project6')">
+                    <div class="portfolio-image">[Image Projet 6 - App Mobile]</div>
+                    <div class="portfolio-info">
+                        <h3>UI Design - Application Fitness</h3>
+                        <p>Interface utilisateur pour application de sport</p>
+                        <span class="project-status">En attente</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quotes Section -->
+    <section class="section quotes-section">
+        <div class="container">
+            <h2 class="section-title">Citations Inspirantes</h2>
+            <div class="quotes-container">
+                <div class="quote active">
+                    <p class="quote-text">"La créativité n'est rien d'autre que l'intelligence qui s'amuse."</p>
+                    <p class="quote-author">— Albert Einstein</p>
+                </div>
+                <div class="quote">
+                    <p class="quote-text">"Le design n'est pas juste ce à quoi ça ressemble. Le design, c'est comment ça fonctionne."</p>
+                    <p class="quote-author">— Steve Jobs</p>
+                </div>
+                <div class="quote">
+                    <p class="quote-text">"La simplicité est la sophistication suprême."</p>
+                    <p class="quote-author">— Leonardo da Vinci</p>
+                </div>
+                <div class="quote">
+                    <p class="quote-text">"Un bon design est évident. Un excellent design est transparent."</p>
+                    <p class="quote-author">— Joe Sparano</p>
+                </div>
+            </div>
+            <div class="quote-nav">
+                <div class="quote-dot active" onclick="showQuote(0)"></div>
+                <div class="quote-dot" onclick="showQuote(1)"></div>
+                <div class="quote-dot" onclick="showQuote(2)"></div>
+                <div class="quote-dot" onclick="showQuote(3)"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="temoignages" class="section testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Témoignages Clients</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Senami a parfaitement cerné nos besoins et a créé une identité visuelle qui nous ressemble. Son professionnalisme et sa créativité ont dépassé nos attentes."</p>
+                    <p class="testimonial-author">— Marie Dubois, Directrice Marketing</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Un travail exceptionnel sur notre site web. L'approche UX de Senami a considérablement amélioré l'expérience de nos utilisateurs."</p>
+                    <p class="testimonial-author">— Jean Martin, CEO Startup Tech</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Collaboration fluide et résultats remarquables. Senami sait transformer une idée en réalisation visuelle impactante."</p>
+                    <p class="testimonial-author">— Sophie Laurent, Entrepreneuse</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <h3>Parlons de votre projet</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Envoyer le message</button>
+                    </form>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <div class="social-icon">Be</div>
+                        <div>
+                            <h4>Behance</h4>
+                            <p>Voir mes projets créatifs</p>
+                        </div>
+                    </a>
+                    <a href="#" class="social-link">
+                        <div class="social-icon">Dr</div>
+                        <div>
+                            <h4>Dribbble</h4>
+                            <p>Découvrir mes inspirations</p>
+                        </div>
+                    </a>
+                    <a href="#" class="social-link">
+                        <div class="social-icon">IG</div>
+                        <div>
+                            <h4>Instagram</h4>
+                            <p>Suivre mon quotidien créatif</p>
+                        </div>
+                    </a>
+                    <a href="#" class="social-link">
+                        <div class="social-icon">in</div>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <p>Réseau professionnel</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Senami Winnie</h3>
+                    <p>Graphiste créative passionnée par l'art de donner vie aux idées à travers le design visuel.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <p>Identité visuelle<br>
+                    Design web & mobile<br>
+                    Retouche photo<br>
+                    Communication print</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: senami.winnie@email.com<br>
+                    Téléphone: +229 01 68 969 996 <br>
+                    Calavi, Bénin</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Senami Winnie. Tous droits réservés. Conçu avec passion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Project Details -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalContent">
+                <!-- Content will be dynamically loaded -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Quotes rotation
+        let currentQuote = 0;
+        const quotes = document.querySelectorAll('.quote');
+        const quoteDots = document.querySelectorAll('.quote-dot');
+
+        function showQuote(index) {
+            // Hide all quotes
+            quotes.forEach(quote => quote.classList.remove('active'));
+            quoteDots.forEach(dot => dot.classList.remove('active'));
+            
+            // Show selected quote
+            quotes[index].classList.add('active');
+            quoteDots[index].classList.add('active');
+            currentQuote = index;
+        }
+
+        // Auto-rotate quotes every 4 seconds
+        setInterval(function() {
+            currentQuote = (currentQuote + 1) % quotes.length;
+            showQuote(currentQuote);
+        }, 4000);
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const nom = document.getElementById('nom').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Simple validation
+            if (nom && email && message) {
+                alert('Merci pour votre message ! Je vous répondrai dans les plus brefs délais.');
+                // Reset form
+                this.reset();
+            } else {
+                alert('Veuillez remplir tous les champs du formulaire.');
+            }
+        });
+
+        // Project modal functionality
+        const projectData = {
+            project1: {
+                title: 'Identité Visuelle - Café Bohème',
+                images: [
+                    '[Image principale - Logo Café Bohème]',
+                    '[Image 2 - Applications logo]',
+                    '[Image 3 - Carte de visite]',
+                    '[Image 4 - Packaging produits]'
+                ],
+                description: 'Création complète d\'une identité visuelle pour un café artisanal situé au cœur de Paris. Le projet incluait la conception du logo, de la charte graphique, du packaging des produits, ainsi que tous les supports de communication.',
+                details: {
+                    client: 'Café Bohème',
+                    année: '2024',
+                    services: 'Logo, Charte graphique, Packaging, Communication print',
+                    statut: 'Terminé'
+                }
+            },
+            project2: {
+                title: 'Design Web - Boutique Mode',
+                images: [
+                    '[Image principale - Page d\'accueil]',
+                    '[Image 2 - Page produit]',
+                    '[Image 3 - Version mobile]',
+                    '[Image 4 - Interface admin]'
+                ],
+                description: 'Conception d\'une interface e-commerce moderne et intuitive pour une boutique de mode en ligne. Focus sur l\'expérience utilisateur et l\'optimisation des conversions.',
+                details: {
+                    client: 'ModeFashion Store',
+                    année: '2024',
+                    services: 'UI/UX Design, Design système, Prototypage',
+                    statut: 'En cours'
+                }
+            },
+            project3: {
+                title: 'Packaging - Ligne Cosmétique',
+                images: [
+                    '[Image principale - Gamme complète]',
+                    '[Image 2 - Détail texture]',
+                    '[Image 3 - Mise en situation]',
+                    '[Image 4 - Variations couleurs]'
+                ],
+                description: 'Design de packaging élégant et raffiné pour une ligne de produits cosmétiques bio. Création d\'un univers visuel cohérent reflétant les valeurs naturelles de la marque.',
+                details: {
+                    client: 'BeautyNature',
+                    année: '2024',
+                    services: 'Design packaging, Direction artistique, Print',
+                    statut: 'Terminé'
+                }
+            },
+            project4: {
+                title: 'Affichage - Festival Musique',
+                images: [
+                    '[Image principale - Affiche festival]',
+                    '[Image 2 - Déclinaisons formats]',
+                    '[Image 3 - Merchandising]',
+                    '[Image 4 - Signalétique événement]'
+                ],
+                description: 'Création de la communication visuelle complète pour un festival de musique. Design d\'affiches, flyers, merchandising et signalétique événementielle.',
+                details: {
+                    client: 'Festival Sounds',
+                    année: '2023',
+                    services: 'Design d\'affiche, Communication événementielle, Merchandising',
+                    statut: 'Terminé'
+                }
+            },
+            project5: {
+                title: 'Logo - Restaurant Gastronomique',
+                images: [
+                    '[Image principale - Logo final]',
+                    '[Image 2 - Processus création]',
+                    '[Image 3 - Applications]',
+                    '[Image 4 - Menu restaurant]'
+                ],
+                description: 'Création d\'un logo sophistiqué pour un restaurant gastronomique. Recherche d\'élégance et de raffinement pour refléter l\'excellence culinaire de l\'établissement.',
+                details: {
+                    client: 'Le Grand Gourmand',
+                    année: '2023',
+                    services: 'Création logo, Identité visuelle, Support print',
+                    statut: 'Terminé'
+                }
+            },
+            project6: {
+                title: 'UI Design - Application Fitness',
+                images: [
+                    '[Image principale - Écrans app]',
+                    '[Image 2 - Wireframes]',
+                    '[Image 3 - Système design]',
+                    '[Image 4 - Interactions]'
+                ],
+                description: 'Conception de l\'interface utilisateur pour une application mobile de fitness. Design centré sur l\'expérience utilisateur avec une approche motivante et engageante.',
+                details: {
+                    client: 'FitLife App',
+                    année: '2024',
+                    services: 'UI Design, UX Research, Design système mobile',
+                    statut: 'En attente'
+                }
+            }
+        };
+
+        function openModal(projectId) {
+            const modal = document.getElementById('projectModal');
+            const modalContent = document.getElementById('modalContent');
+            const project = projectData[projectId];
+            
+            if (project) {
+                modalContent.innerHTML = `
+                    <h2>${project.title}</h2>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                        ${project.images.map(img => `
+                            <div style="aspect-ratio: 1; background: #ecf0f1; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #7f8c8d; text-align: center; padding: 1rem;">
+                                ${img}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <p style="line-height: 1.6; margin-bottom: 2rem;">${project.description}</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; background: #f8f9fa; padding: 1.5rem; border-radius: 8px;">
+                        <div>
+                            <strong>Client:</strong><br>${project.details.client}
+                        </div>
+                        <div>
+                            <strong>Année:</strong><br>${project.details.année}
+                        </div>
+                        <div>
+                            <strong>Services:</strong><br>${project.details.services}
+                        </div>
+                        <div>
+                            <strong>Statut:</strong><br>
+                            <span style="padding: 4px 12px; background: ${project.details.statut === 'Terminé' ? '#27ae60' : project.details.statut === 'En cours' ? '#e74c3c' : '#f39c12'}; color: white; border-radius: 20px; font-size: 0.8rem;">
+                                ${project.details.statut}
+                            </span>
+                        </div>
+                    </div>
+                `;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('projectModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.skill-card, .portfolio-item, .testimonial').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add loading animation for portfolio images
+        document.querySelectorAll('.portfolio-image').forEach(img => {
+            img.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 70%, #f093fb 100%)';
+            });
+            
+            img.addEventListener('mouseleave', function() {
+                this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            });
+        });
+
+        // Enhanced form validation
+        const inputs = document.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#27ae60';
+                }
+            });
+            
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#3498db';
+            });
+        });
+
+        // Add typing effect for hero subtitle
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect after page load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const subtitle = document.querySelector('.hero-content .subtitle');
+                if (subtitle) {
+                    typeWriter(subtitle, 'Graphiste créative & passionnée', 80);
+                }
+            }, 1500);
+        });
+
+        // Add smooth hover effects for social links
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(255, 255, 255, 1)';
+                this.querySelector('.social-icon').style.transform = 'scale(1.1)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(255, 255, 255, 0.98)';
+                this.querySelector('.social-icon').style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
+                     
